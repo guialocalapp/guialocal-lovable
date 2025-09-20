@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    @import 'mapbox-gl/dist/mapbox-gl.css';
+
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+     
+    @layer base {
+      :root {
+        --font-sans: 'Poppins', sans-serif;
+        
+        /* Light Theme */
+        --background: 240 5% 96%; /* #f5f5f7 */
+        --foreground: 240 10% 3.9%; /* #0a0a0a */
+        --card: 0 0% 100%; /* #ffffff */
+        --card-foreground: 240 10% 3.9%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 240 10% 3.9%;
+        --primary: 221 83% 53%; /* #4a69e9 */
+        --primary-foreground: 0 0% 100%;
+        --secondary: 240 4.8% 95.9%; /* #f2f2f7 */
+        --secondary-foreground: 240 10% 3.9%;
+        --muted: 240 4.8% 95.9%;
+        --muted-foreground: 240 3.8% 46.1%;
+        --accent: 240 4.8% 95.9%;
+        --accent-foreground: 240 10% 3.9%;
+        --destructive: 0 84.2% 60.2%; /* #f83c3c */
+        --destructive-foreground: 0 0% 100%;
+        --border: 240 5.9% 90%; /* #e5e5e5 */
+        --input: 240 5.9% 90%;
+        --ring: 221 83% 53%;
+        --radius: 0.5rem;
+      }
+     
+      .dark {
+        --background: 220 10% 8%; /* Very dark gray/near black */
+        --foreground: 210 40% 98%; /* Light gray for text */
+        --card: 220 10% 12%; /* Slightly lighter dark gray */
+        --card-foreground: 210 40% 98%;
+        --popover: 220 10% 12%;
+        --popover-foreground: 210 40% 98%;
+        --primary: 220 10% 20%; /* Deep charcoal */
+        --primary-foreground: 210 40% 98%;
+        --secondary: 220 10% 18%; /* Slightly lighter dark gray */
+        --secondary-foreground: 210 40% 98%;
+        --muted: 220 10% 18%;
+        --muted-foreground: 215 20% 65%; /* Medium gray */
+        --accent: 220 10% 18%;
+        --accent-foreground: 210 40% 98%;
+        --destructive: 0 63% 31%; /* Dark red */
+        --destructive-foreground: 210 40% 98%;
+        --border: 220 10% 25%; /* Dark gray for borders */
+        --input: 220 10% 25%;
+        --ring: 220 10% 20%;
+      }
+    }
+     
+    @layer base {
+      * {
+        @apply border-border;
+      }
+      body {
+        @apply text-foreground;
+        font-family: var(--font-sans);
+      }
+    }
+
+    @layer components {
+      .glass-card {
+        @apply bg-background/50 backdrop-blur-xl border border-border;
+      }
+      .glass-card-dark {
+        @apply bg-card/80 backdrop-blur-2xl border border-border;
+      }
+    }
+
+    /* Custom styles for the new layout */
+    .page-wrapper {
+      @apply flex h-screen bg-background;
+    }
+
+    .main-content {
+      @apply flex-1 flex flex-col;
+    }
+
+    .sidebar {
+      @apply fixed top-0 left-0 h-full z-50 bg-card transition-transform duration-300 -translate-x-full lg:translate-x-0;
+    }
+
+    .sidebar.is-mobile-open {
+      @apply translate-x-0;
+    }
+
+    .page-wrapper .main-content {
+      @apply lg:ml-[250px] transition-all duration-300;
+    }
+
+    .sidebar-logo {
+      @apply flex items-center justify-center h-[70px] border-b border-border flex-shrink-0 px-4;
+    }
+
+    .sidebar-nav-link {
+      @apply flex items-center p-3 text-sm font-medium rounded-md transition-colors;
+    }
+
+    .sidebar-nav-link.active {
+      @apply bg-primary/10 text-primary;
+    }
+
+    .sidebar-nav-link:not(.active):hover {
+      @apply bg-accent text-accent-foreground;
+    }
+
+    .sidebar-nav-link .nav-icon {
+      @apply w-5 h-5 mr-3 transition-all duration-300;
+    }
+
+    .sidebar.is-collapsed .sidebar-nav-link span {
+      @apply lg:hidden;
+    }
+
+    .sidebar.is-collapsed .sidebar-nav-link .nav-icon {
+      @apply lg:mr-0;
+    }
+
+    .sidebar.is-collapsed .sidebar-nav-group-title {
+       @apply lg:text-center;
+    }
+    .sidebar.is-collapsed .sidebar-nav-group-title span {
+      @apply lg:hidden;
+    }
+
+
+    .topbar {
+      @apply sticky top-0 z-30 flex items-center justify-between h-[70px] px-6 bg-card/80 backdrop-blur-lg border-b border-border flex-shrink-0;
+    }
